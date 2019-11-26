@@ -1,0 +1,6 @@
+﻿Công dân sẽ có mã số định danh.
+Theo dự thảo Đề án tổng thể đơn giản hóa thủ tục hành chính, giấy tờ công dân và các cơ sở dữ liệu quốc gia liên quan đến quản lý dân cư đang được Bộ Tư pháp lấy ý kiến, số định danh cá nhân sẽ gồm 12 chữ số, xác lập từ cơ sở dữ liệu quốc gia về dân cư và được ghi trên giấy khai sinh, chứng minh thư.
+Mã số định danh sẽ được cấp cho mỗi công dân Việt Nam từ khi đăng ký khai sinh, gắn với họ đến khi chết và không thay đổi trong suốt cuộc đời.
+Số định danh cá nhân là số gốc để truy nguyên chính xác về công dân trong Cơ sở dữ liệu quốc gia về dân cư phục vụ yêu cầu quản lý của ngành, lĩnh vực và được sử dụng làm cơ sở để liên kết thông tin cá nhân trong các cơ sở dữ liệu ngành, lĩnh vực.
+Thống kê trong cuộc đời, công dân có thể sở hữu khoảng 20 loại giấy tờ (giấy khai sinh, giấy đăng ký kết hôn, hộ khẩu, thẻ bảo hiểm y tế, chứng minh nhân dân, hộ chiếu...), gắn với mỗi loại giấy tờ công dân là một con số nhất định.
+Theo dự thảo đề án, việc cấp mã số định danh công dân sẽ được triển khai từ từ năm 2013 đến năm 2020.

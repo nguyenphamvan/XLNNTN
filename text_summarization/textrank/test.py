@@ -1,6 +1,7 @@
 import re
 from nltk.util import ngrams
-from textrank.preprocessing import FileReader, NLP
+from textrank.readfile import FileReader
+from textrank.preprocessing import NLP
 from textrank import settings
 # s = "Natural-language processing (NLP) is an area of computer science " \
 #     "and artificial intelligence concerned with the interactions " \
@@ -15,8 +16,10 @@ def bigram(doc):
     tokens = [token for token in tokens if token != '']
     return list(ngrams(tokens, 2))
 
-title, reference_summary = FileReader('reference_Summary.txt').read_file()
+title, reference_summary = FileReader('reference_summary.txt').read_file()
 title_sum ,system_summary = FileReader('summary.txt').read_file()
+reference_summary = reference_summary.strip()
+system_summary = system_summary.strip()
 output1 = bigram(reference_summary)
 output2 = bigram(system_summary)
 output3 = intersection(output2, output1)
@@ -25,3 +28,9 @@ print(output1)
 print(output3)
 #
 print(len(output3)/len(output1))
+
+
+
+
+
+

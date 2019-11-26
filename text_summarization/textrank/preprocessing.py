@@ -1,29 +1,7 @@
 from pyvi import ViTokenizer
-import settings
+from textrank.readfile import FileReader
+from textrank import settings
 import nltk
-
-class FileReader(object):
-    def __init__(self, file_path):
-        self.file_path = file_path
-
-    def read_file(self):
-        rows = []
-        with open(self.file_path, 'r', encoding='utf-8') as f:
-            file = f.readlines()
-        for i, row in enumerate(file):
-            row = row.replace('\n', '')
-            if i == 0:
-                title = row
-                pass
-            else:
-                rows.append(row)
-        doc_content = ' '.join(rows)
-        return title, doc_content
-
-    def read_stopwords(self):
-        with open(self.file_path, 'r', encoding='utf-8') as f:
-            stopwords = list(set([w.strip().replace(' ', '_') for w in f.readlines()]))
-        return stopwords
 
 class NLP(object):
     def __init__(self, doc = None):
@@ -34,8 +12,8 @@ class NLP(object):
         self.stopwords = FileReader(settings.STOP_WORDS).read_stopwords()
 
     def sentence_segmentation(self):
-        sent_tokened = nltk.sent_tokenize(self.doc)
-        return sent_tokened
+        sents_tokened = nltk.sent_tokenize(self.doc)
+        return [sent_tokened for sent_tokened in sents_tokened if (sent_tokened not in settings.SPECIAL_CHARACTER and sent_tokened !='.')]
 
     def word_segmentation(self, sent):
         return ViTokenizer.tokenize(sent)
@@ -60,13 +38,22 @@ class NLP(object):
         doc_parsed = []
         sentences = self.sentence_segmentation()
         for sent in sentences:
-            sent_parsed = ' '.join(self.get_words_feature(sent)) + '.'
-            doc_parsed.append(sent_parsed)
+            sent_parsed = ' '.join(self.get_words_feature(sent))+"."
+            if sent_parsed != '.':
+                doc_parsed.append(sent_parsed)
         return doc_parsed
 
-# title, doc = FileReader(settings.DOCUMENT).read_file()
-# print(title)
-# print(doc)
+#Trường hợp câu quá ngắn, và tất cả các từ đều thuộc stopwords sẽ bị loại bỏ
+title, doc = FileReader(settings.DOCUMENT).read_file()
+sents = NLP(doc).sentence_segmentation()
+sentences = NLP(doc).doc_parsed()
+print(sents)
+print(sentences)
+for i,sent in enumerate(sentences):
+    if sent == '':
+        print(i)
+        print(sents[i])
+
 
 
 

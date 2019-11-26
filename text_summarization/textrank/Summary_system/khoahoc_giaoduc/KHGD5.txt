@@ -1,0 +1,5 @@
+﻿Giảm thiểu hiểm hoạ cháy nổ gas với TP-GAS Alarm.
+Hầu hết các vụ cháy nổ do khí gas đều gây thiệt hại nghiêm trọng về tài sản, tính mạng con người.
+Những vụ cháy nổ luôn gây thiệt hại nghiêm trọng cả về người và tài sản.
+Với tính năng cảnh báo sớm dựa vào việc đo sự biến đổi của các số liệu: nhiệt độ, khói và độ ẩm cùng với tính năng cảnh báo sớm từ xa qua hệ thống mạng điện thoại, thiết bị sẽ giúp chúng ta xử lý các vụ cháy ngay từ khi mới xuất hiện cục bộ, đặc biệt trong nhà bếp của từng hộ dân.
+Tính năng cảnh báo rò gas: Dựa trên thông tin phản hồi từ cảm biến khí gas, khi nồng độ khí gas vượt qua 1/4 (một phần tư) ngưỡng an toàn cháy nổ, thiết bị lập tức chuyển sang chế độ báo động tương tự như báo động cảnh báo cháy.
