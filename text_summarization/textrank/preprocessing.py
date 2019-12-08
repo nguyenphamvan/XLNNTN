@@ -1,6 +1,6 @@
 from pyvi import ViTokenizer
-from textrank.readfile import FileReader
-from textrank import settings
+from text_summarization.textrank.readfile import FileReader
+from text_summarization.textrank import settings
 import nltk
 
 class NLP(object):
@@ -43,16 +43,6 @@ class NLP(object):
                 doc_parsed.append(sent_parsed)
         return doc_parsed
 
-#Trường hợp câu quá ngắn, và tất cả các từ đều thuộc stopwords sẽ bị loại bỏ
-title, doc = FileReader(settings.DOCUMENT).read_file()
-sents = NLP(doc).sentence_segmentation()
-sentences = NLP(doc).doc_parsed()
-print(sents)
-print(sentences)
-for i,sent in enumerate(sentences):
-    if sent == '':
-        print(i)
-        print(sents[i])
 
 
 

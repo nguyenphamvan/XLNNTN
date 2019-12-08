@@ -1,4 +1,0 @@
-#!C:\Users\nguye\PycharmProjects\text_summarization\venv\Scripts\python.exe
-# EASY-INSTALL-SCRIPT: 'pyrouge==0.1.3','pyrouge_write_config_file'
-__requires__ = 'pyrouge==0.1.3'
-__import__('pkg_resources').run_script('pyrouge==0.1.3', 'pyrouge_write_config_file')

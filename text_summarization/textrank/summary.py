@@ -2,7 +2,7 @@ from nltk.cluster.util import cosine_distance
 import nltk
 import numpy as np
 from operator import itemgetter
-from textrank import featerExtraction, preprocessing, settings, readfile
+from text_summarization.textrank import featerExtraction, preprocessing, settings, readfile
 import os
 
 class TextRank(object):
@@ -71,10 +71,17 @@ class TextRank(object):
         summary = itemgetter(*selected_sentences)(sentences)
         return summary
 
-    def summary(self, file_path):
-        doc = readfile.FileReader(settings.DOCUMENT).read_file()
-        sentences = nltk.sent_tokenize(doc)
-        doc_parsed = preprocessing.NLP(doc).doc_parsed()
+    def summary(self, text):
+        document = text.split('\n')
+        docs = []
+        for d in document:
+            if d.endswith('.') == False and d != '':
+                d = d + '.'
+            docs.append(d)
+        docs = ' '.join(docs)
+        print(docs)
+        sentences = nltk.sent_tokenize(docs)
+        doc_parsed = preprocessing.NLP(docs).doc_parsed()
         tf_idf_matrix = featerExtraction.FeaterExtraction(doc_parsed).tf_idf().toarray()
 
         summary = self.textrank(sentences, tf_idf_matrix)
@@ -82,43 +89,26 @@ class TextRank(object):
         return summary
 
     def main(self):
-        dirs = os.listdir(settings.PLAINTEXT_PATH)
-        for folder in dirs:
-            file_paths = os.listdir(os.path.join(settings.PLAINTEXT_PATH,folder))
-            for file_path in file_paths:
-                print(folder + " - "+file_path)
-                title,doc = readfile.FileReader(os.path.join(settings.PLAINTEXT_PATH,folder,file_path)).read_file()
-                sentences = preprocessing.NLP(doc).sentence_segmentation()
-                doc_parsed = preprocessing.NLP(doc).doc_parsed()
-                tf_idf_matrix = featerExtraction.FeaterExtraction(doc_parsed).tf_idf().toarray()
-                summary = self.textrank(sentences, tf_idf_matrix)
-                result = ""
-                for _, sent_sum in enumerate(summary):
-                    result = result + sent_sum + "\n"
-                file = open(os.path.join(settings.SUMMARY_SYSTEM_PATH,folder,file_path), 'w', encoding='utf-8')
-                file.write(result)
-                file.close()
+        title, doc = readfile.FileReader(settings.DOCUMENT).read_file()
+        sentences = preprocessing.NLP(doc).sentence_segmentation()
+        doc_parsed = preprocessing.NLP(doc).doc_parsed()
+        tf_idf_matrix = featerExtraction.FeaterExtraction(doc_parsed).tf_idf().toarray()
 
-        # title, doc = readfile.FileReader(settings.DOCUMENT).read_file()
-        # sentences = preprocessing.NLP(doc).sentence_segmentation()
-        # doc_parsed = preprocessing.NLP(doc).doc_parsed()
-        # tf_idf_matrix = featerExtraction.FeaterExtraction(doc_parsed).tf_idf().toarray()
-        # print(doc_parsed)
-        # for i, tf_idf_row in enumerate(tf_idf_matrix):
-        #     if np.sum(tf_idf_row)==0:
-        #         print(i)
-        #
-        # summary = self.textrank(sentences, tf_idf_matrix)
-        # result = title + "\n"
-        # for _, sent_sum in enumerate(summary):
-        #     result = result + sent_sum + "\n"
-        # # file = open(os.path.join(settings.SUMMARY_SYSTEM_PATH, 'boKHCN', 'summary.txt'), 'w', encoding='utf-8')
+        summary = self.textrank(sentences, tf_idf_matrix)
+        result = title + "\n"
+        for _, sent_sum in enumerate(summary):
+            result = result + sent_sum + "\n"
+
         # file = open('summary.txt', 'w', encoding='utf-8')
         # file.write(result)
-        #
-        # print('use tf-idf model')
-        # for idx, sentence in enumerate(self.textrank(sentences, tf_idf_matrix)):
-        #     print("%s. %s" % ((idx + 1), sentence))
+        # file.close()
+
+        print('use tf-idf model')
+        for idx, sentence in enumerate(self.textrank(sentences, tf_idf_matrix)):
+            print("%s. %s" % ((idx + 1), sentence))
 
 if __name__ == '__main__':
+    text = open('/home/nguyenpham/PycharmProjects/XLNNTN/text_summarization/textrank/document.txt','r',encoding='utf-8').read()
+    print(TextRank().summary(text))
+    print()
     TextRank().main()

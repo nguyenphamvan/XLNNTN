@@ -1,5 +1,5 @@
 import nltk
-from textrank import settings
+from text_summarization.textrank import settings
 import os
 
 class FileReader(object):
@@ -25,9 +25,3 @@ class FileReader(object):
         with open(self.file_path, 'r', encoding='utf-8') as f:
             stopwords = list(set([w.strip().replace(' ', '_') for w in f.readlines()]))
         return stopwords
-
-
-# doc = FileReader(os.path.join(settings.DIR_PATH, 'Plaintext','Van Hoa','VH02.txt')).read_file()
-# print(doc)
-# sentences = nltk.sent_tokenize(doc)
-# print(sentences)
